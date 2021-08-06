@@ -10,12 +10,12 @@ import Pricing from "../Financial/Pricing";
 import NewCampaign from "../Campaign/Details";
 
 const App = () => {
-  return (
+    return (
     <div className="ui container">
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Header />
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route path='/' exact component={Home} />
           <ProtectedRoute path="/dashboard" component={Dashboard} />
           <ProtectedRoute path="/add-credit" component={AddCredit} />
           <Route path="/pricing" component={Pricing} />
