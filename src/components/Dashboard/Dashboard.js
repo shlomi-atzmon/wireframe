@@ -5,7 +5,7 @@ import DashboardStats from "./DashboardStats";
 const Dashboard = () => {
   return (
     <div>
-      <div class="ui grid">
+      <div className="ui grid">
         <DashboardList />
         <DashboardStats />
       </div>

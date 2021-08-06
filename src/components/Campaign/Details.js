@@ -11,8 +11,8 @@ const Details = () => {
         <label>Description</label>
         <input type="text" name="description" placeholder="Description" />
       </div>
-      <button class="ui left floated button">Discard</button>
-      <button class="ui right floated primary button">Next</button>
+      <button className="ui left floated button">Discard</button>
+      <button className="ui right floated primary button">Next</button>
     </form>
   );
 };
