@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import ProtectedRoute from "../../config/ProtectedRoute";
 
 import Header from "../Header/Header";
 import Home from "../Home/Home";
@@ -8,20 +9,19 @@ import AddCredit from "../Financial/AddCredit";
 import Pricing from "../Financial/Pricing";
 import NewCampaign from "../Campaign/Details";
 
-import { useSelector } from "react-redux";
-
 const App = () => {
-  const state = useSelector(state=>state);
-  console.log(state);
   return (
     <div className="ui container">
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Header />
-        <Route path={process.env.PUBLIC_URL + "/"} exact component={Home} />
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/add-credit" component={AddCredit} />
-        <Route path="/pricing" component={Pricing} />
-        <Route path="/new-campaign" component={NewCampaign} />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <ProtectedRoute path="/dashboard" component={Dashboard} />
+          <ProtectedRoute path="/add-credit" component={AddCredit} />
+          <Route path="/pricing" component={Pricing} />
+          <ProtectedRoute path="/new-campaign" component={NewCampaign} />
+          <Route path="*" component={() => "404 NOT FOUND"} />
+        </Switch>
       </BrowserRouter>
     </div>
   );
