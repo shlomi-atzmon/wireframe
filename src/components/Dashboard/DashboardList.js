@@ -30,29 +30,28 @@ const campaigns = [
 
 const renderedList = campaigns.map((campaign, index) => {
   return (
-    <div className="ui fluid card" key={index}>
-      <div className="content">
-        <div className="right floated meta">
-          <i className="info icon"></i>
+    <div key={index}>
+      <div>
+        <div>
+          <i></i>
         </div>
         <img
-          className="ui avatar image"
           src={campaign.user.avatar}
           alt={campaign.user.name}
         />{" "}
         {campaign.user.name}
       </div>
 
-      <div className="content">
-        <div className="header">{campaign.title}</div>
-        <div className="meta">Participants: {campaign.participants}</div>
-        <div className="meta">Modules: {campaign.modules}</div>
-        <div className="description">{campaign.description}</div>
+      <div>
+        <div>{campaign.title}</div>
+        <div>Participants: {campaign.participants}</div>
+        <div>Modules: {campaign.modules}</div>
+        <div>{campaign.description}</div>
       </div>
 
-      <div className="extra content">
+      <div>
         <span>Cost · {campaign.cost}$</span>
-        <span className="right floated">
+        <span>
           <span>{campaign.scheduled}</span>
         </span>
       </div>
@@ -61,7 +60,7 @@ const renderedList = campaigns.map((campaign, index) => {
 });
 
 const DashboardList = () => {
-  return <div className="five wide column">{renderedList}</div>;
+  return <div>{renderedList}</div>;
 };
 
 export default DashboardList;

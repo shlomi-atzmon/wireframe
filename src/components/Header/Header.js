@@ -10,20 +10,16 @@ const Header = () => {
   };
 
   return (
-    <div className="ui secondary menu">
-      <Link to="/" className="item">
-        The Game
-      </Link>
-      <div className="right menu">
+    <div>
+      <Link to="/">The Game</Link>
+      <div>
         {isSignedIn && (
           <>
-            <Link to="/add-credit" className="item">
-              Add Credit
-            </Link>
-            <div className="item">Balance: 100$</div>
+            <Link to="/add-credit">Add Credit</Link>
+            <div>Balance: 100$</div>
           </>
         )}
-        <Link to="/dashboard" className="item" onClick={onAuthChange}>
+        <Link to="/dashboard" onClick={onAuthChange}>
           {isSignedIn ? "Sign Out" : "Sign In"}
         </Link>
       </div>

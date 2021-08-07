@@ -1,18 +1,16 @@
-import React from "react";
-
 const Details = () => {
   return (
-    <form className="ui form">
-      <div className="field">
+    <form>
+      <div>
         <label>Campaign title</label>
         <input type="text" name="campaign-title" placeholder="Campaign title" />
       </div>
-      <div className="field">
+      <div>
         <label>Description</label>
         <input type="text" name="description" placeholder="Description" />
       </div>
-      <button className="ui left floated button">Discard</button>
-      <button className="ui right floated primary button">Next</button>
+      <button>Discard</button>
+      <button>Next</button>
     </form>
   );
 };
