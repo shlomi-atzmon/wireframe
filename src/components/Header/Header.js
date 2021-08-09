@@ -5,13 +5,14 @@ import { useSelector, useDispatch } from "react-redux";
 const Header = () => {
   const isSignedIn = useSelector((state) => state.auth.isSignedIn);
   const dispatch = useDispatch();
+
   const onAuthChange = () => {
     dispatch({ type: isSignedIn ? "SIGN_OUT" : "SIGN_IN" });
   };
 
   return (
     <div>
-      <Link to="/">The Game</Link>
+      <Link to={isSignedIn ? "/dashboard" : "/"}>The Game</Link>
       <div>
         {isSignedIn && (
           <>
