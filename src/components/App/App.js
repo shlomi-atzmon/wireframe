@@ -12,14 +12,12 @@ import NewCampaign from "../Campaign/Details";
 
 //CSS
 import { ThemeProvider } from "styled-components";
-import GlobalStyles from '../UI/GlobalStyles';
+import GlobalStyles from "../UI/GlobalStyles";
 import AppTheme from "../UI/AppTheme";
-
 
 const App = () => {
   return (
     <ThemeProvider theme={AppTheme}>
-      <>
       <GlobalStyles />
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Header />
@@ -32,7 +30,6 @@ const App = () => {
           <Route path="*" component={() => "404 NOT FOUND"} />
         </Switch>
       </BrowserRouter>
-      </>
     </ThemeProvider>
   );
 };

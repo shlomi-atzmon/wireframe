@@ -33,11 +33,12 @@ const renderedList = campaigns.map((campaign, index) => {
     <div key={index}>
       <div>
         <div>
-          <i></i>
+          icon
         </div>
         <img
           src={campaign.user.avatar}
           alt={campaign.user.name}
+          s
         />{" "}
         {campaign.user.name}
       </div>

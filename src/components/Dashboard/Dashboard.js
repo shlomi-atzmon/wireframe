@@ -5,10 +5,8 @@ import DashboardStats from "./DashboardStats";
 const Dashboard = () => {
   return (
     <div>
-      <div>
-        <DashboardList />
-        <DashboardStats />
-      </div>
+      <DashboardList />
+      <DashboardStats />
     </div>
   );
 };

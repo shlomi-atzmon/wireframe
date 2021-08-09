@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
+import NavBar from "../UI/NavBar/NavBar";
+
 const Header = () => {
   const isSignedIn = useSelector((state) => state.auth.isSignedIn);
   const dispatch = useDispatch();
@@ -11,20 +13,22 @@ const Header = () => {
   };
 
   return (
-    <div>
+    <NavBar>
       <Link to={isSignedIn ? "/dashboard" : "/"}>The Game</Link>
-      <div>
-        {isSignedIn && (
-          <>
-            <Link to="/add-credit">Add Credit</Link>
-            <div>Balance: 100$</div>
-          </>
-        )}
-        <Link to="/dashboard" onClick={onAuthChange}>
-          {isSignedIn ? "Sign Out" : "Sign In"}
-        </Link>
-      </div>
-    </div>
+      {isSignedIn && (
+        <>
+          <Link to="/add-credit">Add Credit</Link>
+          <Link to="#">Balance: 100$</Link>
+        </>
+      )}
+      <Link
+        to="/dashboard"
+        onClick={onAuthChange}
+        style={{ "margin-left": "auto" }}
+      >
+        {isSignedIn ? "Sign Out" : "Sign In"}
+      </Link>
+    </NavBar>
   );
 };
 
