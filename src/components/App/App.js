@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ProtectedRoute from "../../config/ProtectedRoute";
 
 import Header from "../Header/Header";
@@ -7,12 +7,15 @@ import Home from "../Home/Home";
 import Dashboard from "../Dashboard/Dashboard";
 import AddCredit from "../Financial/AddCredit";
 import Pricing from "../Financial/Pricing";
-import NewCampaign from "../Campaign/Details";
+import NewCampaign from "../Campaign/NewCampaign";
+import AddRecipients from '../Campaign/AddRecipients';
+import AddModules from '../Campaign/AddModules';
+import ScheduleCampaign from '../Campaign/ScheduleCampaign';
 
 const App = () => {
     return (
     <div className="ui container">
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <Router basename={process.env.PUBLIC_URL}>
         <Header />
         <Switch>
           <Route path='/' exact component={Home} />
@@ -20,9 +23,12 @@ const App = () => {
           <ProtectedRoute path="/add-credit" component={AddCredit} />
           <Route path="/pricing" component={Pricing} />
           <ProtectedRoute path="/new-campaign" component={NewCampaign} />
+          <ProtectedRoute path="/add-recipients" component={AddRecipients} />
+          <ProtectedRoute path="/add-modules" component={AddModules} />
+          <ProtectedRoute path="/schedule-campaign" component={ScheduleCampaign} />
           <Route path="*" component={() => "404 NOT FOUND"} />
         </Switch>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 };
