@@ -3,43 +3,69 @@ import { useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
+// Validator
+import { yupResolver } from "@hookform/resolvers/yup";
+import { object, string } from "yup";
+
+//Components
+import FormContainer from "./FormContainer";
+
+const schema = object().shape({
+  title: string()
+    .max(60, "It's a very long name")
+    .required("Title is required"),
+  description: string().required("Description is required"),
+});
+
 const NewCampaign = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: "onBlur",
+    resolver: yupResolver(schema),
+  });
 
   const onSubmit = (data) => {
-    dispatch({ type: "ADD_FORM_DATA", payload: data });
+    dispatch({ type: "NEW_CAMPAING", payload: data });
     history.push("./add-recipients");
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="ui form">
-      <div className="field">
-        <label>Campaign title</label>
-        <input
-          type="text"
-          name="campaign-title"
-          placeholder="Campaign title"
-          {...register("title")}
-        />
-      </div>
-      <div className="field">
-        <label>Description</label>
-        <input
-          type="text"
-          name="description"
-          placeholder="Description"
-          {...register("description")}
-        />
-      </div>
-      <Link to="/dashboard" className="ui left floated button">
-        Discard
-      </Link>
-      <button className="ui right floated primary button" type="submit">
-        Next
-      </button>
-    </form>
+    <FormContainer>
+      <h2 className="ui center aligned header">Add a new Campaign</h2>
+      <form onSubmit={handleSubmit(onSubmit)} className="ui large form">
+        <div className="field">
+          <label>Campaign title</label>
+          <input
+            type="text"
+            placeholder="Campaign title"
+            {...register("title")}
+          />
+          {/* TODO - ADD ERROR COMPONENT  */}
+          <p style={{ color: "#9f3a38" }}>{errors.title?.message}</p>
+        </div>
+        <div className="field">
+          <label>Description</label>
+          <textarea
+            placeholder="Tell us more..."
+            rows="3"
+            {...register("description")}
+          ></textarea>
+          <p style={{ color: "#9f3a38" }}>{errors.description?.message}</p>
+        </div>
+
+        <Link to="/dashboard" className="ui left floated button">
+          Discard
+        </Link>
+        <button className="ui right floated primary button" type="submit">
+          Next
+        </button>
+      </form>
+    </FormContainer>
   );
 };
 

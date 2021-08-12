@@ -1,6 +1,13 @@
-export const addFormData = (payload) => {
+export const newCampaign = (payload) => {
   return {
-    type: "ADD_FORM_DATA",
+    type: "NEW_CAMPAING",
+    payload,
+  };
+};
+
+export const addRecipients = (payload) => {
+  return {
+    type: "ADD_RECIPIENTS",
     payload,
   };
 };

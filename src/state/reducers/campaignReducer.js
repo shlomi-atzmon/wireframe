@@ -28,7 +28,9 @@ const CAMPAIGNS = [
 
 const campaignReducer = (state = CAMPAIGNS, action) => {
   switch (action.type) {
-    case "ADD_FORM_DATA":
+    case "NEW_CAMPAING":
+      return { ...state, ...action.payload };
+    case "ADD_RECIPIENTS":
       return { ...state, ...action.payload };
     default:
       return state;
