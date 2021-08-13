@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 const DashboardList = () => {
   const campaigns = useSelector((state) => state.campaigns);
 
-  const renderedList = campaigns.map((campaign, index) => {
+  const renderedList = Object.values(campaigns).map((campaign, index) => {
     return (
       <div className="ui fluid card" key={index}>
         <div className="content">

@@ -10,6 +10,17 @@ import { object, string } from "yup";
 //Components
 import FormContainer from "./FormContainer";
 
+// TODO - add to final step
+const getDate = () => {
+  const date = new Date();
+    const monthNames = [
+      "Jan","Feb","Mar","Apr",
+      "May","Jun","Jul","Aug",
+      "Sept","Oct","Nov","Dec",
+    ];
+    return monthNames[date.getMonth()] + ' ' + date.getDate() + ", " + date.getFullYear();
+}
+
 const schema = object().shape({
   title: string()
     .max(60, "It's a very long name")
@@ -30,6 +41,12 @@ const NewCampaign = () => {
   });
 
   const onSubmit = (data) => {
+    // temp data
+    data.user = {
+      name: "Fisher",
+      avatar: "https://semantic-ui.com/images/avatar/small/elliot.jpg",
+    };
+    data.scheduled = getDate();
     dispatch({ type: "NEW_CAMPAING", payload: data });
     history.push("./add-recipients");
   };

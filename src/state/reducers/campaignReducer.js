@@ -1,5 +1,7 @@
-const CAMPAIGNS = [
-  {
+import _ from "lodash";
+
+const CAMPAIGNS = {
+  1: {
     title: "Q1 activity 2021",
     description: "Last year's budget leftovers.",
     participants: 100,
@@ -8,10 +10,10 @@ const CAMPAIGNS = [
     scheduled: "Mar 12, 2019",
     user: {
       name: "Monty",
-      avatar: "https://semantic-ui.com/images/avatar/large/jenny.jpg",
+      avatar: "https://semantic-ui.com/images/avatar/small/jenny.jpg",
     },
   },
-  {
+  2: {
     title: "Passover activity 2019",
     description:
       "Heavy Meital stopped eating cakes so there was some money left in the cashbox.",
@@ -21,17 +23,19 @@ const CAMPAIGNS = [
     scheduled: "Nov 2, 2020",
     user: {
       name: "Shlomi",
-      avatar: "https://semantic-ui.com/images/avatar/large/steve.jpg",
+      avatar: "https://semantic-ui.com/images/avatar/small/steve.jpg",
     },
   },
-];
+};
 
 const campaignReducer = (state = CAMPAIGNS, action) => {
   switch (action.type) {
     case "NEW_CAMPAING":
-      return { ...state, ...action.payload };
+      return { ...state, [_.size(Object.keys(state)) + 1]: action.payload };
     case "ADD_RECIPIENTS":
-      return { ...state, ...action.payload };
+      const id = _.size(Object.keys(state));
+      Object.assign(state[id], action.payload)
+      return { ...state};
     default:
       return state;
   }
