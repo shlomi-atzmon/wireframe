@@ -32,10 +32,16 @@ const campaignReducer = (state = CAMPAIGNS, action) => {
   switch (action.type) {
     case "NEW_CAMPAING":
       return { ...state, [_.size(Object.keys(state)) + 1]: action.payload };
-    case "ADD_RECIPIENTS":
+    case "ADD_RECIPIENTS": {
       const id = _.size(Object.keys(state));
-      Object.assign(state[id], action.payload)
-      return { ...state};
+      Object.assign(state[id], action.payload);
+      return { ...state };
+    }
+    case "ADD_MODULES": {
+      const id = _.size(Object.keys(state));
+      Object.assign(state[id], action.payload);
+      return { ...state };
+    }
     default:
       return state;
   }

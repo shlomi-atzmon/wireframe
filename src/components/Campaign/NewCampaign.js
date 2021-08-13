@@ -10,7 +10,7 @@ import { object, string } from "yup";
 //Components
 import FormContainer from "./FormContainer";
 
-// TODO - add to final step
+// TODO - remove to final step
 const getDate = () => {
   const date = new Date();
     const monthNames = [
@@ -43,7 +43,7 @@ const NewCampaign = () => {
   const onSubmit = (data) => {
     // temp data
     data.user = {
-      name: "Fisher",
+      name: "Eyal",
       avatar: "https://semantic-ui.com/images/avatar/small/elliot.jpg",
     };
     data.scheduled = getDate();

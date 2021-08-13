@@ -8,21 +8,11 @@ const AddRecipients = () => {
   const [showButton, setShowButton] = useState(true);
   const dispatch = useDispatch();
   const history = useHistory();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { handleSubmit } = useForm();
 
   const onSubmit = () => {
-    // TODO - count table number of participants
     dispatch({ type: "ADD_RECIPIENTS", payload: { participants: 3 } });
     history.push("./add-modules");
-  };
-
-  const handleAddRecipients = (e) => {
-    setShowButton(false);
-    console.log("show table of Recipients");
   };
 
   return (
@@ -32,7 +22,7 @@ const AddRecipients = () => {
         <div className="field">
           {showButton ? (
             <button
-              onClick={handleAddRecipients}
+              onClick={setShowButton(false)}
               className="ui purple basic button"
               type="button"
             >

@@ -11,3 +11,10 @@ export const addRecipients = (payload) => {
     payload,
   };
 };
+
+export const addModules = (payload) => {
+  return {
+    type: "ADD_MODULES",
+    payload,
+  };
+};
