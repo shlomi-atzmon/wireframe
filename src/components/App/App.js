@@ -1,4 +1,6 @@
 import React from "react";
+import '../../styles/Manifest.scss';
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ProtectedRoute from "../../config/ProtectedRoute";
 
@@ -16,7 +18,7 @@ import ScheduleCampaign from '../Campaign/ScheduleCampaign';
 
 const App = () => {
     return (
-    <div className="ui container">
+    <div className="ui Fluid">
       <Router basename={process.env.PUBLIC_URL}>
         <Header />
         <Switch>
