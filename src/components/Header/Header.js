@@ -11,7 +11,7 @@ const Header = () => {
 
   return (
     <div className="ui menu">
-      <div class="ui container site-header">
+      <div className="ui container site-header">
         <Link to={isSignedIn ? "/dashboard" : "/"} className="item">
           The Game
         </Link>
