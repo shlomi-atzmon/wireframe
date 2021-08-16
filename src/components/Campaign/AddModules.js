@@ -58,12 +58,12 @@ const AddModules = () => {
       </div>
 
       <div className="five wide column">
-        <Link to="/dashboard" className="ui left floated button">
+        <Link to="/dashboard" className="ui left floated secondary basic button">
           Discard
         </Link>
         <button
           onClick={onClick}
-          className="ui right floated primary button"
+          className="ui right floated primary basic button"
           type="button"
         >
           Next

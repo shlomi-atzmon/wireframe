@@ -75,10 +75,10 @@ const NewCampaign = () => {
           <p style={{ color: "#9f3a38" }}>{errors.description?.message}</p>
         </div>
 
-        <Link to="/dashboard" className="ui left floated button">
+        <Link to="/dashboard" className="ui left floated secondary basic button">
           Discard
         </Link>
-        <button className="ui right floated primary button" type="submit">
+        <button className="ui right floated primary basic button" type="submit">
           Next
         </button>
       </form>

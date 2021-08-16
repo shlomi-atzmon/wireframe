@@ -15,6 +15,10 @@ const AddRecipients = () => {
     history.push("./add-modules");
   };
 
+  const handleAddRecipients = () => {
+    setShowButton(false);
+  };
+
   return (
     <FormContainer>
       <h2 className="ui center aligned header">Add Recipients</h2>
@@ -22,7 +26,7 @@ const AddRecipients = () => {
         <div className="field">
           {showButton ? (
             <button
-              onClick={setShowButton(false)}
+              onClick={handleAddRecipients}
               className="ui purple basic button"
               type="button"
             >
@@ -58,10 +62,10 @@ const AddRecipients = () => {
           )}
         </div>
 
-        <Link to="/dashboard" className="ui left floated button">
+        <Link to="/dashboard" className="ui left floated secondary basic button">
           Discard
         </Link>
-        <button className="ui right floated primary button" type="submit">
+        <button className="ui right floated primary basic button" type="submit">
           Next
         </button>
       </form>

@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const ScheduleCampaign = () => {
   const campaign = useSelector((state) => {
@@ -8,31 +9,37 @@ const ScheduleCampaign = () => {
   });
 
   return (
-    <>
-      <div>{campaign.title} Campaign</div>
-      <div>{campaign.participants} Recipients</div>
-      <div>{campaign.modules} Modules Selected</div>
-      <div>Total cost {campaign.cost}</div>
-      <div className="ui form">
-        <div className="inline fields">
-          <div className="inline fields">
-            <label>Start: </label>
-            <div className="field">
-              <div className="ui radio checkbox">
-                <input type="radio" name="schedule" checked="checked" />
-                <label>Immediately</label>
-              </div>
-            </div>
-            <div className="field">
-              <div className="ui radio checkbox">
-                <input type="radio" name="schedule" />
-                <label>On:</label>
-              </div>
-            </div>
-          </div>
+    <div
+      className="ui middle aligned center aligned grid"
+      style={{
+        margin: "auto",
+        padding: "100px",
+      }}
+    >
+      <div className="ui segments">
+        <div className="ui segment">
+          <h2 className="ui header">
+            <div className="content">{campaign.title} Campaign</div>
+          </h2>
+        </div>
+
+        <div className="ui segments">
+          <div className="ui segment">{campaign.participants} Recipients</div>
+          <div className="ui red segment">{campaign.modules} Modules Selected</div>
+          <div className="ui blue segment">Total Cost {campaign.cost}</div>
+          <div className="ui green segment">Schedule at {campaign.scheduled}</div>
+        </div>
+
+        <div className="ui segments">
+          <Link
+            to="/dashboard"
+            className="ui left floated primary basic button"
+          >
+            Attack!
+          </Link>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
