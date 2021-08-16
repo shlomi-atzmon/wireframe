@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
-import FormContainer from "./FormContainer";
+import FormWrapper from "../../hoc/FormWrapper/FormWrapper";
 
 const AddRecipients = () => {
   const [showButton, setShowButton] = useState(true);
@@ -20,7 +20,7 @@ const AddRecipients = () => {
   };
 
   return (
-    <FormContainer>
+    <FormWrapper>
       <h2 className="ui center aligned header">Add Recipients</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="ui large form">
         <div className="field">
@@ -69,7 +69,7 @@ const AddRecipients = () => {
           Next
         </button>
       </form>
-    </FormContainer>
+    </FormWrapper>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-const FormContainer = ({ children }) => {
+const FormWrapper = ({ children }) => {
   return (
     <div className="ui center aligned middle grid">
       <div className="column" style={{ maxWidth: "500px" }}>
@@ -10,4 +10,4 @@ const FormContainer = ({ children }) => {
   );
 };
 
-export default FormContainer;
+export default FormWrapper;

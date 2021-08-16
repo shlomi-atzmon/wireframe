@@ -1,0 +1,12 @@
+.error,.success{
+    text-align: left;
+}
+
+.success{
+    color: $success_green;
+} 
+
+
+.error{
+    color: $error_red;
+}

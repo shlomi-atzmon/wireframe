@@ -8,18 +8,34 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string } from "yup";
 
 //Components
-import FormContainer from "./FormContainer";
+import FormWrapper from "../../hoc/FormWrapper/FormWrapper";
+import ValidationMessage from "../../hoc/ValidationMessage/ValidationMessage";
 
 // TODO - remove to final step
 const getDate = () => {
   const date = new Date();
-    const monthNames = [
-      "Jan","Feb","Mar","Apr",
-      "May","Jun","Jul","Aug",
-      "Sept","Oct","Nov","Dec",
-    ];
-    return monthNames[date.getMonth()] + ' ' + date.getDate() + ", " + date.getFullYear();
-}
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  return (
+    monthNames[date.getMonth()] +
+    " " +
+    date.getDate() +
+    ", " +
+    date.getFullYear()
+  );
+};
 
 const schema = object().shape({
   title: string()
@@ -52,7 +68,7 @@ const NewCampaign = () => {
   };
 
   return (
-    <FormContainer>
+    <FormWrapper>
       <h2 className="ui center aligned header">Add a new Campaign</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="ui large form">
         <div className="field">
@@ -62,8 +78,10 @@ const NewCampaign = () => {
             placeholder="Campaign title"
             {...register("title")}
           />
-          {/* TODO - ADD ERROR COMPONENT  */}
-          <p style={{ color: "#9f3a38" }}>{errors.title?.message}</p>
+
+          <ValidationMessage type={false}>
+            {errors.title?.message}
+          </ValidationMessage>
         </div>
         <div className="field">
           <label>Description</label>
@@ -72,17 +90,23 @@ const NewCampaign = () => {
             rows="3"
             {...register("description")}
           ></textarea>
-          <p style={{ color: "#9f3a38" }}>{errors.description?.message}</p>
+
+          <ValidationMessage type={false}>
+            {errors.description?.message}
+          </ValidationMessage>
         </div>
 
-        <Link to="/dashboard" className="ui left floated secondary basic button">
+        <Link
+          to="/dashboard"
+          className="ui left floated secondary basic button"
+        >
           Discard
         </Link>
         <button className="ui right floated primary basic button" type="submit">
           Next
         </button>
       </form>
-    </FormContainer>
+    </FormWrapper>
   );
 };
 

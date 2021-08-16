@@ -2,7 +2,7 @@ import React from "react";
 import '../../styles/Manifest.scss';
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import ProtectedRoute from "../../config/ProtectedRoute";
+import ProtectedRoute from "../../hoc/ProtectedRoute/ProtectedRoute";
 
 import Header from "../Header/Header";
 import Home from "../Home/Home";
