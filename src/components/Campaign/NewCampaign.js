@@ -69,12 +69,13 @@ const NewCampaign = () => {
 
   return (
     <FormWrapper>
-      <h2 className="ui center aligned header">Add a new Campaign</h2>
+      <h2 className="ui center aligned header">Add a new campaign</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="ui large form">
         <div className="field">
           <label>Campaign title</label>
           <input
             type="text"
+            autoComplete="off"
             placeholder="Campaign title"
             {...register("title")}
           />

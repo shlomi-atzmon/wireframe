@@ -62,8 +62,8 @@ const AddRecipients = () => {
           )}
         </div>
 
-        <Link to="/dashboard" className="ui left floated secondary basic button">
-          Discard
+        <Link to="/new-campaign" className="ui left floated secondary basic button">
+          Back
         </Link>
         <button className="ui right floated primary basic button" type="submit">
           Next

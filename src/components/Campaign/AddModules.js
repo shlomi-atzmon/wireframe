@@ -34,7 +34,7 @@ const AddModules = () => {
     return Object.values(modules).map((module, index) => {
       return (
         <div className="ui fluid card" key={index}>
-          <div className="content">
+          <div className="content center aligned">
             <div className="header">{module.title}</div>
             <div className="description">
               Playing Time <b>{module.duration} Min</b>
@@ -49,34 +49,53 @@ const AddModules = () => {
   };
 
   return (
-    <div className="ui grid">
-      <div className="five wide column">
-        <h2 className="ui center aligned header">Your Campaign</h2>
-        <div className="ui middle aligned list">
-          {renderMoules(campaignModules)}
+    <>
+      <h2 className="ui center aligned header">Add Modules</h2>
+      <div className="ui grid">
+        <div class="sixteen column row">
+          <div className="four wide column"></div>
+
+          <div className="three wide column">
+            <h3 className="ui center aligned header">Your Campaign</h3>
+            <div className="ui middle aligned list">
+              {renderMoules(campaignModules)}
+            </div>
+          </div>
+
+          <div className="two wide column"></div>
+
+          <div className="three wide column">
+            <h3 className="ui center aligned header">Threat Modules</h3>
+            <div className="ui middle aligned list">
+              {renderMoules(threatModules)}
+            </div>
+          </div>
+
+          <div className="foue wide column"></div>
+        </div>
+        <div class="row">
+          <div className="seven wide column">
+            <Link
+              to="/add-recipients"
+              className="ui right floated secondary basic button"
+            >
+              Back
+            </Link>
+          </div>
+          <div className="two wide column"></div>
+          <div className="seven wide column">
+          <button
+              onClick={onClick}
+              className="ui primary basic button"
+              type="button"
+            >
+              Next
+            </button>  
+          </div>
+
         </div>
       </div>
-
-      <div className="five wide column">
-        <Link to="/dashboard" className="ui left floated secondary basic button">
-          Discard
-        </Link>
-        <button
-          onClick={onClick}
-          className="ui right floated primary basic button"
-          type="button"
-        >
-          Next
-        </button>
-      </div>
-
-      <div className="five wide column">
-        <h2 className="ui center aligned header">Threat Modules</h2>
-        <div className="ui middle aligned list">
-          {renderMoules(threatModules)}
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 
