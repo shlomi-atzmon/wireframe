@@ -52,7 +52,7 @@ const AddModules = () => {
     <>
       <h2 className="ui center aligned header">Add Modules</h2>
       <div className="ui grid">
-        <div class="sixteen column row">
+        <div className="sixteen column row">
           <div className="four wide column"></div>
 
           <div className="three wide column">
@@ -73,7 +73,7 @@ const AddModules = () => {
 
           <div className="foue wide column"></div>
         </div>
-        <div class="row">
+        <div className="row">
           <div className="seven wide column">
             <Link
               to="/add-recipients"

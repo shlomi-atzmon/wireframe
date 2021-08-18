@@ -13,7 +13,7 @@ const Header = () => {
     <div className="ui menu">
       <div className="ui container site-header">
         <Link to={isSignedIn ? "/dashboard" : "/"} className="item">
-          The Game
+          Cynario
         </Link>
         <div className="right menu">
           {isSignedIn && (

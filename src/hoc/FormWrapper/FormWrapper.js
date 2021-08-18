@@ -3,12 +3,11 @@ import React from "react";
 const FormWrapper = ({ children }) => {
   return (
     <>
-   
-    <div className="ui center aligned middle grid">
-      <div className="column" style={{ maxWidth: "500px" }}>
-        {children}
+      <div className="ui center aligned middle grid">
+        <div className="column" style={{ maxWidth: "600px" }}>
+          {children}
+        </div>
       </div>
-    </div>
     </>
   );
 };
