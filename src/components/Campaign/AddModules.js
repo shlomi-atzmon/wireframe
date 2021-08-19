@@ -1,101 +1,187 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import React, { useState } from "react";
+// DragDropContext = all of our colomns, Droppable colomn, Draggable card
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-const campaignModules = {
-  1: { title: "Introdution", duration: "10", costPerRecipient: "0" },
-};
-const threatModules = {
-  1: { title: "Session Hijacking", duration: "10", costPerRecipient: "4" },
-  2: { title: "IP Spoofing", duration: "12", costPerRecipient: "6" },
-  3: { title: "DDos", duration: "30", costPerRecipient: "15" },
-  4: { title: "Man In The Middle", duration: "11", costPerRecipient: "7" },
-  5: { title: "Phishing", duration: "3", costPerRecipient: "3" },
-  6: { title: "Ransomware", duration: "6", costPerRecipient: "17" },
-  7: {
+// TODO - REMOVE WHAN CONNECT TO SERVER
+import { v4 as uuidv4 } from "uuid";
+
+const campaignModules = [
+  {id: uuidv4(), title: "Introdution", duration: "10", costPerRecipient: "0" },
+];
+
+const threatModules = [
+  {
+    id: uuidv4(),
+    title: "Session Hijacking",
+    duration: "10",
+    costPerRecipient: "4",
+  },
+  { id: uuidv4(), title: "IP Spoofing", duration: "12", costPerRecipient: "6" },
+  { id: uuidv4(), title: "DDos", duration: "30", costPerRecipient: "15" },
+  {
+    id: uuidv4(),
+    title: "Man In The Middle",
+    duration: "11",
+    costPerRecipient: "7",
+  },
+  { id: uuidv4(), title: "Phishing", duration: "3", costPerRecipient: "3" },
+  { id: uuidv4(), title: "Ransomware", duration: "6", costPerRecipient: "17" },
+  {
+    id: uuidv4(),
     title: "Attack On IoT Devices",
     duration: "23 Min",
     costPerRecipient: "25",
   },
-  8: { title: "Malware On Mobile", duration: "13 Min", costPerRecipient: "22" },
-  9: { title: "Password Attack", duration: "17 Min", costPerRecipient: "13" },
+  {
+    id: uuidv4(),
+    title: "Malware On Mobile",
+    duration: "13 Min",
+    costPerRecipient: "22",
+  },
+  {
+    id: uuidv4(),
+    title: "Password Attack",
+    duration: "17 Min",
+    costPerRecipient: "13",
+  },
+];
+
+const columnsFromBackend = {
+  [uuidv4()]: {
+    name: "Your Campaign",
+    items: campaignModules,
+  },
+  [uuidv4()]: {
+    name: "Threat Modules",
+    items: threatModules,
+  },
+};
+
+const onDragEnd = (result, columns, setColumns) => {
+  if (!result.destination) return;
+  const { source, destination } = result;
+
+  if (source.droppableId !== destination.droppableId) {
+    const sourceColumn = columns[source.droppableId];
+    const destColumn = columns[destination.droppableId];
+    const sourceItems = [...sourceColumn.items];
+    const destItems = [...destColumn.items];
+    const [removed] = sourceItems.splice(source.index, 1);
+    destItems.splice(destination.index, 0, removed);
+    setColumns({
+      ...columns,
+      [source.droppableId]: {
+        ...sourceColumn,
+        items: sourceItems,
+      },
+      [destination.droppableId]: {
+        ...destColumn,
+        items: destItems,
+      },
+    });
+  } else {
+    const column = columns[source.droppableId];
+    const copiedItems = [...column.items];
+    const [removed] = copiedItems.splice(source.index, 1);
+    copiedItems.splice(destination.index, 0, removed);
+    setColumns({
+      ...columns,
+      [source.droppableId]: {
+        ...column,
+        items: copiedItems,
+      },
+    });
+  }
 };
 
 const AddModules = () => {
-  const dispatch = useDispatch();
-  const history = useHistory();
-
-  const onClick = () => {
-    dispatch({ type: "ADD_MODULES", payload: { modules: 5, cost: "5,000" } });
-    history.push("./schedule-campaign");
-  };
-
-  const renderMoules = (modules) => {
-    return Object.values(modules).map((module, index) => {
-      return (
-        <div className="ui fluid card" key={index}>
-          <div className="content center aligned">
-            <div className="header">{module.title}</div>
-            <div className="description">
-              Playing Time <b>{module.duration} Min</b>
-            </div>
-            <div className="description">
-              Cost Per Recipient <b>{module.costPerRecipient}$</b>
-            </div>
-          </div>
-        </div>
-      );
-    });
-  };
-
+  const [columns, setColumns] = useState(columnsFromBackend);
   return (
-    <>
-      <h2 className="ui center aligned header">Add Modules</h2>
-      <div className="ui grid">
-        <div className="sixteen column row">
-          <div className="four wide column"></div>
-
-          <div className="three wide column">
-            <h3 className="ui center aligned header">Your Campaign</h3>
-            <div className="ui middle aligned list">
-              {renderMoules(campaignModules)}
-            </div>
-          </div>
-
-          <div className="two wide column"></div>
-
-          <div className="three wide column">
-            <h3 className="ui center aligned header">Threat Modules</h3>
-            <div className="ui middle aligned list">
-              {renderMoules(threatModules)}
-            </div>
-          </div>
-
-          <div className="foue wide column"></div>
-        </div>
-        <div className="row">
-          <div className="seven wide column">
-            <Link
-              to="/add-recipients"
-              className="ui right floated secondary basic button"
+    <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
+      <DragDropContext
+        onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
+      >
+        {Object.entries(columns).map(([columnId, column], index) => {
+          return (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+              key={columnId}
             >
-              Back
-            </Link>
-          </div>
-          <div className="two wide column"></div>
-          <div className="seven wide column">
-          <button
-              onClick={onClick}
-              className="ui primary basic button"
-              type="button"
-            >
-              Next
-            </button>  
-          </div>
-
-        </div>
-      </div>
-    </>
+              <h2>{column.name}</h2>
+              <div style={{ margin: 8 }}>
+                <Droppable droppableId={columnId} key={columnId}>
+                  {(provided, snapshot) => {
+                    return (
+                      <div
+                        {...provided.droppableProps}
+                        ref={provided.innerRef}
+                        style={{
+                          padding: 4,
+                          width: 250,
+                          minHeight: 500,
+                        }}
+                      >
+                        {column.items.map((item, index) => {
+                          return (
+                            <Draggable
+                              key={item.id}
+                              draggableId={item.id}
+                              index={index}
+                            >
+                              {(provided, snapshot) => {
+                                return (
+                                  <div
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    style={{
+                                      userSelect: "none",
+                                      padding: 16,
+                                      margin: "0 0 8px 0",
+                                      minHeight: "50px",
+                                      backgroundColor: snapshot.isDragging
+                                        ? "#263B4A"
+                                        : "#456C86",
+                                      color: "white",
+                                      ...provided.draggableProps.style,
+                                    }}
+                                  >
+                                    <div className="ui fluid card" key={index}>
+                                      <div className="content center aligned">
+                                        <div className="header">
+                                          {item.title}
+                                        </div>
+                                        <div className="description">
+                                          Playing Time{" "}
+                                          <b>{item.duration} Min</b>
+                                        </div>
+                                        <div className="description">
+                                          Cost Per Recipient{" "}
+                                          <b>{item.costPerRecipient}$</b>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              }}
+                            </Draggable>
+                          );
+                        })}
+                        {provided.placeholder}
+                      </div>
+                    );
+                  }}
+                </Droppable>
+              </div>
+            </div>
+          );
+        })}
+      </DragDropContext>
+    </div>
   );
 };
 

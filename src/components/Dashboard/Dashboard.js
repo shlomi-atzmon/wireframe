@@ -15,7 +15,7 @@ const Dashboard = () => {
         </Link>
       </div>
       <div className="five wide column">
-        <div class="ui cards">
+        <div className="ui cards">
           <DashboardList />
         </div>
       </div>

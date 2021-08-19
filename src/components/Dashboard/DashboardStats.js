@@ -2,7 +2,7 @@ import React from "react";
 
 const DashboardStats = () => {
   return (
-    <div class="ui two cards">
+    <div className="ui two cards">
       <div className="card">
         <div className="ui statistic">
           <div className="value">26</div>
