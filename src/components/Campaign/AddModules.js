@@ -1,65 +1,15 @@
 import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+
 // DragDropContext = all of our colomns, Droppable colomn, Draggable card
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { columnsData } from "../../data/Modules";
 
-// TODO - REMOVE WHAN CONNECT TO SERVER
-import { v4 as uuidv4 } from "uuid";
+// TODO - get from state
+const participants = 3;
 
-const campaignModules = [
-  { id: uuidv4(), title: "Introdution", duration: "10", costPerRecipient: "0" },
-];
-
-const threatModules = [
-  {
-    id: uuidv4(),
-    title: "Session Hijacking",
-    duration: "10",
-    costPerRecipient: "4",
-  },
-  { id: uuidv4(), title: "IP Spoofing", duration: "12", costPerRecipient: "6" },
-  { id: uuidv4(), title: "DDos", duration: "30", costPerRecipient: "15" },
-  {
-    id: uuidv4(),
-    title: "Man In The Middle",
-    duration: "11",
-    costPerRecipient: "7",
-  },
-  { id: uuidv4(), title: "Phishing", duration: "3", costPerRecipient: "3" },
-  { id: uuidv4(), title: "Ransomware", duration: "6", costPerRecipient: "17" },
-  {
-    id: uuidv4(),
-    title: "Attack On IoT Devices",
-    duration: "23 Min",
-    costPerRecipient: "25",
-  },
-  {
-    id: uuidv4(),
-    title: "Malware On Mobile",
-    duration: "13 Min",
-    costPerRecipient: "22",
-  },
-  {
-    id: uuidv4(),
-    title: "Password Attack",
-    duration: "17 Min",
-    costPerRecipient: "13",
-  },
-];
-
-const columnsFromBackend = {
-  [uuidv4()]: {
-    name: "Your Campaign",
-    items: campaignModules,
-  },
-  [uuidv4()]: {
-    name: "Threat Modules",
-    items: threatModules,
-  },
-};
-
-const onDragEnd = (result, columns, setColumns) => {
+const onDragEnd = (result, columns, setColumns, setTotals) => {
   if (!result.destination) return;
   const { source, destination } = result;
 
@@ -70,6 +20,17 @@ const onDragEnd = (result, columns, setColumns) => {
     const destItems = [...destColumn.items];
     const [removed] = sourceItems.splice(source.index, 1);
     destItems.splice(destination.index, 0, removed);
+
+    // TODO - setModulesSummary function
+    let cost = 0;
+    const summaryItems = destination.droppableId === "0" ? { ...destItems } : { ...sourceItems };
+    const modules = destination.droppableId === "0" ? destItems.length : sourceItems.length;
+    for (let item in summaryItems) {
+      cost += summaryItems[item].costPerRecipient * participants;
+    }
+    setTotals({ modules, cost });
+    // TODO - end of function
+
     setColumns({
       ...columns,
       [source.droppableId]: {
@@ -99,21 +60,23 @@ const onDragEnd = (result, columns, setColumns) => {
 const AddModules = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const [columns, setColumns] = useState(columnsData);
+  const [totals, setTotals] = useState({ modules: 1, cost: 0 });
 
   const onClick = () => {
-    // TODO - COUNT MODULES AND COST
-    dispatch({ type: "ADD_MODULES", payload: { modules: 5, cost: "5,000" } });
+    dispatch({ type: "ADD_MODULES", payload: totals });
     history.push("./schedule-campaign");
   };
 
-  const [columns, setColumns] = useState(columnsFromBackend);
   return (
     <>
       <div
         style={{ display: "flex", justifyContent: "center", height: "100%" }}
       >
         <DragDropContext
-          onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
+          onDragEnd={(result) =>
+            onDragEnd(result, columns, setColumns, setTotals)
+          }
         >
           {Object.entries(columns).map(([columnId, column], index) => {
             return (
@@ -208,7 +171,10 @@ const AddModules = () => {
         </div>
         <div className="eight wide column">
           <div className="ui divider">
-            <div style={{textAlign:"center"}}>Total cost of 5000$ for 3 recipient</div>
+            <div style={{ textAlign: "center" }}>
+              {totals.modules} modules were selected at a total cost of{" "}
+              {totals.cost}$ for 3 recipients
+            </div>
           </div>
         </div>
         <div className="four wide column">
