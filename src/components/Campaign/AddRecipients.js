@@ -6,89 +6,73 @@ import * as XLSX from "xlsx";
 import FormWrapper from "../../hoc/FormWrapper/FormWrapper";
 
 const AddRecipients = () => {
+  const [items, setItems] = useState([]);
   const [showButton, setShowButton] = useState(true);
+  const [participants, setParticipants] = useState(0);
   const dispatch = useDispatch();
   const history = useHistory();
   const { handleSubmit } = useForm();
 
   const onSubmit = () => {
-    dispatch({ type: "ADD_RECIPIENTS", payload: { participants: 3 } });
+    dispatch({ type: "ADD_RECIPIENTS", payload: { participants } });
     history.push("./add-modules");
   };
 
-  const handleUpload = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      let readedData = XLSX.read(e.target.result, { type: "binary" });
-      let wsname = readedData.SheetNames[0];
-      let ws = readedData.Sheets[wsname];
-      let data = XLSX.utils.sheet_to_json(ws, { header: 1 });
-      handleRecipients(data);
-    };
+  const readExcel = (file) => {
+    new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsArrayBuffer(file);
 
-    reader.readAsBinaryString(file);
+      fileReader.onload = (e) => {
+        const bufferArray = e.target.result;
+        const wb = XLSX.read(bufferArray, { type: "buffer" });
+        const wsname = wb.SheetNames[0];
+        const ws = wb.Sheets[wsname];
+        const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
+        resolve(data);
+      };
 
-    setShowButton(false);
-  };
-
-  const handleRecipients = (data) => {
-    data.forEach((row) => {
-      console.log(row);
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    }).then((data) => {
+      setItems(data);
+      setParticipants(data.length);
+      setShowButton(false);
     });
   };
 
   const renderRecipients = () => {
     return !showButton ? (
       <>
-      <table className="ui celled table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Mobile</th>
-            <th>action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td data-label="First-Name">Monty</td>
-            <td data-label="Last-Name">Alon</td>
-            <td data-label="Age">alonmo@gmail.com</td>
-            <td data-label="Job">0526344250</td>
-            <td className="center aligned">
-              <i className="edit outline icon"></i>
-              <i className="trash alternate outline icon"></i>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td data-label="First-Name">Shlomi</td>
-            <td data-label="Last-Name">Atzmon</td>
-            <td data-label="Age">shlomiatzmon82@gmail.com</td>
-            <td data-label="Job">0546535023</td>
-            <td className="center aligned">
-              <i className="edit outline icon"></i>
-              <i className="trash alternate outline icon"></i>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td data-label="First-Name">Eyal</td>
-            <td data-label="Last-Name">Fisher</td>
-            <td data-label="Age">fisher.eyal@gmail.com</td>
-            <td data-label="Job">0544684772</td>
-            <td className="center aligned">
-              <i className="edit outline icon"></i>
-              <i className="trash alternate outline icon"></i>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div>Total recipients: 3</div>
+        <table className="ui celled table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Mobile</th>
+              <th>action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map((data, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td data-label="First-Name">{data[0]}</td>
+                <td data-label="Last-Name">{data[1]}</td>
+                <td data-label="Email">{data[2]}</td>
+                <td data-label="Mobile">0{data[3]}</td>
+                <td className="center aligned">
+                  <i className="edit outline icon"></i>
+                  <i className="trash alternate outline icon"></i>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div>Total recipients: {participants}</div>
       </>
     ) : null;
   };
@@ -114,8 +98,10 @@ const AddRecipients = () => {
               style={{ display: "none" }}
               name="recipients"
               onChange={(e) => {
-                handleUpload(e);
+                const file = e.target.files[0];
+                readExcel(file);
               }}
+              accept=".xl*"
             />
             <label
               className="ui right floated purple basic button"

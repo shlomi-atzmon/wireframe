@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 // DragDropContext = all of our colomns, Droppable colomn, Draggable card
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { columnsData } from "../../data/Modules";
 
-// TODO - get from state
-const participants = 3;
-
-const onDragEnd = (result, columns, setColumns, setTotals) => {
+const onDragEnd = (result, columns, setColumns, setTotals, participants) => {
   if (!result.destination) return;
   const { source, destination } = result;
 
@@ -23,8 +20,10 @@ const onDragEnd = (result, columns, setColumns, setTotals) => {
 
     // TODO - setModulesSummary function
     let cost = 0;
-    const summaryItems = destination.droppableId === "0" ? { ...destItems } : { ...sourceItems };
-    const modules = destination.droppableId === "0" ? destItems.length : sourceItems.length;
+    const summaryItems =
+      destination.droppableId === "0" ? { ...destItems } : { ...sourceItems };
+    const modules =
+      destination.droppableId === "0" ? destItems.length : sourceItems.length;
     for (let item in summaryItems) {
       cost += summaryItems[item].costPerRecipient * participants;
     }
@@ -62,6 +61,9 @@ const AddModules = () => {
   const history = useHistory();
   const [columns, setColumns] = useState(columnsData);
   const [totals, setTotals] = useState({ modules: 1, cost: 0 });
+  const [participants] = useState(
+    useSelector(({ campaigns }) => campaigns.newCampaign.participants)
+  );
 
   const onClick = () => {
     dispatch({ type: "ADD_MODULES", payload: totals });
@@ -75,7 +77,7 @@ const AddModules = () => {
       >
         <DragDropContext
           onDragEnd={(result) =>
-            onDragEnd(result, columns, setColumns, setTotals)
+            onDragEnd(result, columns, setColumns, setTotals, participants)
           }
         >
           {Object.entries(columns).map(([columnId, column], index) => {
@@ -173,7 +175,7 @@ const AddModules = () => {
           <div className="ui divider">
             <div style={{ textAlign: "center" }}>
               {totals.modules} modules were selected at a total cost of{" "}
-              {totals.cost}$ for 3 recipients
+              {totals.cost}$ for {participants} recipients
             </div>
           </div>
         </div>
