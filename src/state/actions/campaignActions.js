@@ -19,6 +19,12 @@ export const addModules = (payload) => {
   };
 };
 
+export const removeCampaing = () => {
+  return {
+    type: "REMOVE_CAMPAING",
+  };
+};
+
 export const submitCampaing = () => {
   return {
     type: "SUBMIT_CAMPAING",

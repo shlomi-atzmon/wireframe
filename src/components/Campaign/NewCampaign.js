@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 //Dummy data
@@ -41,6 +41,11 @@ const NewCampaign = () => {
     history.push("./add-recipients");
   };
 
+  const onDiscard = () => {
+    dispatch({ type: "REMOVE_CAMPAING" });
+    history.push("./dashboard");
+  };
+
   return (
     <FormWrapper>
       <h2 className="ui center aligned header">Add a new campaign</h2>
@@ -71,12 +76,12 @@ const NewCampaign = () => {
           </ValidationMessage>
         </div>
 
-        <Link
-          to="/dashboard"
+        <button
           className="ui left floated secondary basic button"
+          onClick={onDiscard}
         >
           Discard
-        </Link>
+        </button>
         <button className="ui right floated primary basic button" type="submit">
           Next
         </button>

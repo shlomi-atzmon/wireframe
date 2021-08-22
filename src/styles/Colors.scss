@@ -1,5 +1,4 @@
-$primary_gray:#ECEFF4;
-
+$primary_gray: #eceff4;
 
 //validation
 $error_red: #9f3a38;
@@ -7,6 +6,20 @@ $success_green: #38a948;
 
 
 
- 
-// all site layout background-color:#161d31;
-// text of site color  color: #b4b7bd;
+
+//palette options
+$primary_dark_light: #161d31; // site body - background-color:#161d31
+$dark_lilac: #283046; // site cards  - all cards is padding: 1.5rem;
+$lavender: #7367f0; 
+
+/* 
+hover box-shadow: 0 8px 25px -8px $lavender; 
+btn-border: $lavender;
+btn-background-color: $lavender;
+
+btn on hover
+background-color: #5344ed; //Goodnight Moon
+border-color: #4839eb;
+*/
+
+// text of site  color: #b4b7bd;
