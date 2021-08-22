@@ -21,7 +21,7 @@ const ScheduleCampaign = () => {
           <div className="ui violet segment">
             {campaign.modules} Modules Selected
           </div>
-          <div className="ui purple segment">Total Cost {campaign.cost}</div>
+          <div className="ui purple segment">Total Cost {campaign.cost}$</div>
           <div className="ui teal segment">
             Schedule at {campaign.scheduled}
           </div>
