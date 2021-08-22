@@ -4,16 +4,18 @@ import { Campaigns } from "../../data/Campaigns";
 const campaignReducer = (state = Campaigns, action) => {
   switch (action.type) {
     case "NEW_CAMPAING":
-      return { ...state, [_.size(Object.keys(state)) + 1]: action.payload };
+      console.log(state);
+      return { ...state, newCampaign: action.payload };
     case "ADD_RECIPIENTS": {
-      const id = _.size(Object.keys(state));
-      Object.assign(state[id], action.payload);
-      return { ...state };
+      return {...state, newCampaign: {...state.newCampaign, ...action.payload}}
     }
     case "ADD_MODULES": {
-      const id = _.size(Object.keys(state));
-      Object.assign(state[id], action.payload);
-      return { ...state };
+      return {...state, newCampaign: {...state.newCampaign, ...action.payload}}
+    }
+    case "SUBMIT_CAMPAING": {
+      const campaign = {...state.newCampaign}
+      delete state.newCampaign;
+      return {...state, [_.size(Object.keys(state)) + 1]:campaign}
     }
     default:
       return state;

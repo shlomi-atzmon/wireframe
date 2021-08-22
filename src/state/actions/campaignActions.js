@@ -18,3 +18,9 @@ export const addModules = (payload) => {
     payload,
   };
 };
+
+export const submitCampaing = () => {
+  return {
+    type: "SUBMIT_CAMPAING",
+  };
+};

@@ -1,13 +1,17 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory ,Link } from "react-router-dom";
 import FormWrapper from "../../hoc/FormWrapper/FormWrapper";
 
 const ScheduleCampaign = () => {
-  const campaign = useSelector((state) => {
-    const campaigns = state.campaigns;
-    return Object.values(campaigns)[Object.keys(campaigns).length - 1];
-  });
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const campaign = useSelector(({ campaigns }) => campaigns.newCampaign);
+
+  const onClick = () => {
+    dispatch({ type: "SUBMIT_CAMPAING"});
+    history.push("./dashboard");
+  };
 
   return (
     <FormWrapper>
@@ -33,9 +37,12 @@ const ScheduleCampaign = () => {
         >
           Back
         </Link>
-        <Link to="/dashboard" className="ui right floated primary basic button">
-          Attack!
-        </Link>
+
+        <button
+            className="ui right floated primary basic button"
+            type="button"
+            onClick={onClick}
+        >Attack!</button>
       </form>
     </FormWrapper>
   );
