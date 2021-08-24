@@ -18,7 +18,7 @@ import ScheduleCampaign from '../Campaign/ScheduleCampaign';
 
 const App = () => {
     return (
-    <div className="ui Fluid">
+    <div className="container">
       <Router basename={process.env.PUBLIC_URL}>
         <Header />
         <Switch>

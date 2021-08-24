@@ -10,25 +10,22 @@ const Header = () => {
   };
 
   return (
-    <div className="ui menu">
-      <div className="ui container site-header">
-        <Link to={isSignedIn ? "/dashboard" : "/"} className="item">
-          Cynario
-        </Link>
-        <div className="right menu">
-          {isSignedIn && (
-            <>
-              <Link to="/add-credit" className="item">
-                Add Credit
-              </Link>
-              <div className="item">Balance: 100$</div>
-            </>
-          )}
-          <Link to="/dashboard" className="item" onClick={onAuthChange}>
-            {isSignedIn ? "Sign Out" : "Sign In"}
+    <div className="header">
+      <Link to={isSignedIn ? "/dashboard" : "/"} className="app-logo">
+        Cynario
+      </Link>
+
+      {isSignedIn && (
+        <>
+          <Link to="/add-credit" className="add-credit">
+            Add Credit
           </Link>
-        </div>
-      </div>
+          <div className="balance">Balance: 100$</div>
+        </>
+      )}
+      <Link to="/dashboard" className="auth" onClick={onAuthChange}>
+        {isSignedIn ? "Sign Out" : "Sign In"}
+      </Link>
     </div>
   );
 };

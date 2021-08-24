@@ -6,21 +6,20 @@ const DashboardList = () => {
 
   return Object.values(campaigns).map((campaign, index) => {
     return (
-      <div className="ui fluid card" key={index}>
-        <div className="content">
-          <div className="right floated meta">
-            <i className="info icon"></i>
-          </div>
+      <div className="card" key={index}>
+        <div className="card-info">
           <img
-            className="ui avatar image"
+            className="avatar-image"
             src={campaign.user.avatar}
             alt={campaign.user.name}
-          />{" "}
-          {campaign.user.name}
+          />{campaign.user.name}
+          <div>
+            <i>info</i>
+          </div>
         </div>
 
         <div className="content">
-          <div className="header">{campaign.title}</div>
+          <div>{campaign.title}</div>
           <div className="meta">Participants: {campaign.participants}</div>
           <div className="meta">Modules: {campaign.modules}</div>
           <div className="description">{campaign.description}</div>

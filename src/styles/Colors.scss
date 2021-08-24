@@ -1,16 +1,21 @@
 $primary_gray: #eceff4;
 
+//palette options
+$primary_dark_light: #161D31;
+$dark_lilac: #283046; 
+$lavender: #7367f0;
+$text_gray: #b4b7bd;
+$white:#fff;
+
+
 //validation
 $error_red: #9f3a38;
 $success_green: #38a948;
 
 
-
-
-//palette options
-$primary_dark_light: #161d31; // site body - background-color:#161d31
-$dark_lilac: #283046; // site cards  - all cards is padding: 1.5rem;
-$lavender: #7367f0; 
+// TODO - MOVE TO ANOTHER FILE
+$nav_bar_padding:0.8rem 1rem;
+$padding: 1.5rem; // site cards  - all cards is ;
 
 /* 
 hover box-shadow: 0 8px 25px -8px $lavender; 
@@ -21,5 +26,3 @@ btn on hover
 background-color: #5344ed; //Goodnight Moon
 border-color: #4839eb;
 */
-
-// text of site  color: #b4b7bd;
