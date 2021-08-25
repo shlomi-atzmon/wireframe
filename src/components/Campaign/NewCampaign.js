@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -25,6 +25,7 @@ const schema = object().shape({
 const NewCampaign = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const campaign = useSelector(({ campaign }) => campaign);
   const {
     register,
     handleSubmit,
@@ -32,6 +33,10 @@ const NewCampaign = () => {
   } = useForm({
     mode: "onBlur",
     resolver: yupResolver(schema),
+    defaultValues: {
+      title: campaign.title,
+      description:campaign.description
+    }
   });
 
   const onSubmit = (data) => {

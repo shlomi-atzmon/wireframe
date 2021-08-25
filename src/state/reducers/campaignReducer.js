@@ -1,24 +1,17 @@
-import _ from "lodash";
-import { Campaigns } from "../../data/Campaigns";
+import { FormData } from "../../data/FormData";
 
-const campaignReducer = (state = Campaigns, action) => {
+const campaignReducer = (state = FormData, action) => {
   switch (action.type) {
     case "NEW_CAMPAING":
-      return { ...state, newCampaign: action.payload };
+      return { ...state, ...action.payload };
     case "ADD_RECIPIENTS": {
-      return {...state, newCampaign: {...state.newCampaign, ...action.payload}}
+      return { ...state, ...action.payload };
     }
     case "ADD_MODULES": {
-      return {...state, newCampaign: {...state.newCampaign, ...action.payload}}
+      return { ...state, ...action.payload };
     }
-    case "REMOVE_CAMPAING":{
-      delete state.newCampaign;
-      return {...state }
-    }
-    case "SUBMIT_CAMPAING": {
-      const campaign = {...state.newCampaign}
-      delete state.newCampaign;
-      return {...state, [_.size(Object.keys(state)) + 1]:campaign}
+    case "REMOVE_CAMPAING": {
+      return { ...FormData };
     }
     default:
       return state;

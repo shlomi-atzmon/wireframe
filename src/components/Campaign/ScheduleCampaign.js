@@ -1,15 +1,15 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory ,Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import FormWrapper from "../../hoc/FormWrapper/FormWrapper";
 
 const ScheduleCampaign = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const campaign = useSelector(({ campaigns }) => campaigns.newCampaign);
+  const campaign = useSelector(({ campaign }) => campaign);
 
   const onClick = () => {
-    dispatch({ type: "SUBMIT_CAMPAING"});
+    dispatch({ type: "SUBMIT_CAMPAING", payload: campaign });
     history.push("./dashboard");
   };
 
@@ -39,10 +39,12 @@ const ScheduleCampaign = () => {
         </Link>
 
         <button
-            className="ui right floated primary basic button"
-            type="button"
-            onClick={onClick}
-        >Attack!</button>
+          className="ui right floated primary basic button"
+          type="button"
+          onClick={onClick}
+        >
+          Attack!
+        </button>
       </form>
     </FormWrapper>
   );

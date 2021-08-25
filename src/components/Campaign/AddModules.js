@@ -62,7 +62,7 @@ const AddModules = () => {
   const [columns, setColumns] = useState(columnsData);
   const [totals, setTotals] = useState({ modules: 1, cost: 0 });
   const [participants] = useState(
-    useSelector(({ campaigns }) => campaigns.newCampaign.participants)
+    useSelector(({ campaign }) => campaign.participants)
   );
 
   const onClick = () => {

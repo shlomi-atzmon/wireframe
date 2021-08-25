@@ -15,6 +15,7 @@ import NewCampaign from "../Campaign/NewCampaign";
 import AddRecipients from '../Campaign/AddRecipients';
 import AddModules from '../Campaign/AddModules';
 import ScheduleCampaign from '../Campaign/ScheduleCampaign';
+import CampaignInfo from '../Campaign/CampaignInfo';
 
 const App = () => {
     return (
@@ -30,6 +31,7 @@ const App = () => {
           <ProtectedRoute path="/add-recipients" component={AddRecipients} />
           <ProtectedRoute path="/add-modules" component={AddModules} />
           <ProtectedRoute path="/schedule-campaign" component={ScheduleCampaign} />
+          <ProtectedRoute path="/campaign-info/:id" component={CampaignInfo} />
           <Route path="*" component={() => "404 NOT FOUND"} />
         </Switch>
       </Router>

@@ -24,9 +24,3 @@ export const removeCampaing = () => {
     type: "REMOVE_CAMPAING",
   };
 };
-
-export const submitCampaing = () => {
-  return {
-    type: "SUBMIT_CAMPAING",
-  };
-};

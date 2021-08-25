@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const DashboardList = () => {
@@ -9,7 +10,9 @@ const DashboardList = () => {
       <div className="ui fluid card" key={index}>
         <div className="content">
           <div className="right floated meta">
-            <i className="info icon"></i>
+            <Link to={`/campaign-info/${index}`}>
+              <i className="info icon"></i>
+            </Link>
           </div>
           <img
             className="ui avatar image"
