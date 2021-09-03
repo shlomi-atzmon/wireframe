@@ -4,7 +4,7 @@ const campaignReducer = (state = Campaigns, action) => {
   switch (action.type) {
     case "campaing/submit": {
       state.unshift(action.payload);
-      return { ...state };
+      return [ ...state ];
     }
     default:
       return state;

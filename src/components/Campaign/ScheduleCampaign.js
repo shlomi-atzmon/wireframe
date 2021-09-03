@@ -1,8 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
-import { submitCampaing } from '../../state/actions/campaignsActions';
 import FormWrapper from "../../hoc/FormWrapper/FormWrapper";
+import { submitCampaing } from '../../state/actions/campaignsActions';
+import { removeCampaing } from '../../state/actions/campaignActions';
+
 
 const ScheduleCampaign = () => {
   const dispatch = useDispatch();
@@ -11,6 +13,7 @@ const ScheduleCampaign = () => {
 
   const onClick = () => {
     dispatch(submitCampaing(campaign));
+    dispatch(removeCampaing());
     history.push("./dashboard");
   };
 
