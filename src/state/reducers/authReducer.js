@@ -4,9 +4,9 @@ const INTIAL_STATE = {
 
 const authReducer = (state = INTIAL_STATE, action) => {
   switch (action.type) {
-    case "SIGN_IN":
+    case "auth/signIn":
       return { ...state, isSignedIn: true };
-    case "SIGN_OUT":
+    case "auth/signOut":
       return { ...state, isSignedIn: false };
     default:
       return state;

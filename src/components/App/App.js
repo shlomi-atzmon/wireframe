@@ -11,7 +11,7 @@ import AddCredit from "../Financial/AddCredit";
 import Pricing from "../Financial/Pricing";
 
 // Add Campaign
-import NewCampaign from "../Campaign/NewCampaign";
+import CampaignDetails from "../Campaign/CampaignDetails";
 import AddRecipients from '../Campaign/AddRecipients';
 import AddModules from '../Campaign/AddModules';
 import ScheduleCampaign from '../Campaign/ScheduleCampaign';
@@ -27,7 +27,7 @@ const App = () => {
           <ProtectedRoute path="/dashboard" component={Dashboard} />
           <ProtectedRoute path="/add-credit" component={AddCredit} />
           <Route path="/pricing" component={Pricing} />
-          <ProtectedRoute path="/new-campaign" component={NewCampaign} />
+          <ProtectedRoute path="/new-campaign" component={CampaignDetails} />
           <ProtectedRoute path="/add-recipients" component={AddRecipients} />
           <ProtectedRoute path="/add-modules" component={AddModules} />
           <ProtectedRoute path="/schedule-campaign" component={ScheduleCampaign} />

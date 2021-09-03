@@ -2,15 +2,15 @@ import { FormData } from "../../data/FormData";
 
 const campaignReducer = (state = FormData, action) => {
   switch (action.type) {
-    case "NEW_CAMPAING":
+    case "campaign/details":
       return { ...state, ...action.payload };
-    case "ADD_RECIPIENTS": {
-      return { ...state, ...action.payload };
-    }
-    case "ADD_MODULES": {
+    case "campaign/addRecipients": {
       return { ...state, ...action.payload };
     }
-    case "REMOVE_CAMPAING": {
+    case "campaign/addModules": {
+      return { ...state, ...action.payload };
+    }
+    case "campaign/remove": {
       return { ...FormData };
     }
     default:

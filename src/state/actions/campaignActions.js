@@ -1,26 +1,26 @@
-export const newCampaign = (payload) => {
+export const campaignDetails = (payload) => {
   return {
-    type: "NEW_CAMPAING",
+    type: "campaign/details",
     payload,
   };
 };
 
 export const addRecipients = (payload) => {
   return {
-    type: "ADD_RECIPIENTS",
+    type: "campaign/addRecipients",
     payload,
   };
 };
 
 export const addModules = (payload) => {
   return {
-    type: "ADD_MODULES",
+    type: "campaign/addModules",
     payload,
   };
 };
 
 export const removeCampaing = () => {
   return {
-    type: "REMOVE_CAMPAING",
+    type: "campaign/remove",
   };
 };

@@ -6,7 +6,7 @@ const Header = () => {
   const isSignedIn = useSelector((state) => state.auth.isSignedIn);
   const dispatch = useDispatch();
   const onAuthChange = () => {
-    dispatch({ type: isSignedIn ? "SIGN_OUT" : "SIGN_IN" });
+    dispatch({ type: isSignedIn ? "auth/signOut" : "auth/signIn" });
   };
 
   return (

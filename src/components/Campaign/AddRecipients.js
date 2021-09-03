@@ -14,7 +14,7 @@ const AddRecipients = () => {
   const { handleSubmit } = useForm();
 
   const onSubmit = () => {
-    dispatch({ type: "ADD_RECIPIENTS", payload: { participants } });
+    dispatch({ type: "campaign/addRecipients", payload: { participants } });
     history.push("./add-modules");
   };
 

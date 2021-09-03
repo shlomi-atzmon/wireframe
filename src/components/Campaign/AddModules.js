@@ -66,7 +66,7 @@ const AddModules = () => {
   );
 
   const onClick = () => {
-    dispatch({ type: "ADD_MODULES", payload: totals });
+    dispatch({ type: "campaign/addModules", payload: totals });
     history.push("./schedule-campaign");
   };
 

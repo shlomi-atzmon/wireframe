@@ -9,7 +9,7 @@ const ScheduleCampaign = () => {
   const campaign = useSelector(({ campaign }) => campaign);
 
   const onClick = () => {
-    dispatch({ type: "SUBMIT_CAMPAING", payload: campaign });
+    dispatch({ type: "campaing/submit", payload: campaign });
     history.push("./dashboard");
   };
 

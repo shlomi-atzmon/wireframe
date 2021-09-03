@@ -22,7 +22,7 @@ const schema = object().shape({
   description: string().required("Description is required"),
 });
 
-const NewCampaign = () => {
+const CampaignDetails = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const campaign = useSelector(({ campaign }) => campaign);
@@ -42,12 +42,12 @@ const NewCampaign = () => {
   const onSubmit = (data) => {
     data.user = User;
     data.scheduled = getDate();
-    dispatch({ type: "NEW_CAMPAING", payload: data });
+    dispatch({ type: "campaign/details", payload: data });
     history.push("./add-recipients");
   };
 
   const onDiscard = () => {
-    dispatch({ type: "REMOVE_CAMPAING" });
+    dispatch({ type: "campaign/remove" });
     history.push("./dashboard");
   };
 
@@ -95,4 +95,4 @@ const NewCampaign = () => {
   );
 };
 
-export default NewCampaign;
+export default CampaignDetails;
