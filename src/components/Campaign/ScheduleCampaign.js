@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
+import { submitCampaing } from '../../state/actions/campaignsActions';
 import FormWrapper from "../../hoc/FormWrapper/FormWrapper";
 
 const ScheduleCampaign = () => {
@@ -9,7 +10,7 @@ const ScheduleCampaign = () => {
   const campaign = useSelector(({ campaign }) => campaign);
 
   const onClick = () => {
-    dispatch({ type: "campaing/submit", payload: campaign });
+    dispatch(submitCampaing(campaign));
     history.push("./dashboard");
   };
 

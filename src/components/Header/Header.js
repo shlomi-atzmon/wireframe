@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { signIn, signOut } from "../../state/actions/authActions";
 
 const Header = () => {
   const isSignedIn = useSelector((state) => state.auth.isSignedIn);
   const dispatch = useDispatch();
   const onAuthChange = () => {
-    dispatch({ type: isSignedIn ? "auth/signOut" : "auth/signIn" });
+    dispatch(isSignedIn ? signOut() : signIn());
   };
 
   return (

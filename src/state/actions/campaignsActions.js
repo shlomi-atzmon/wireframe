@@ -1,5 +1,4 @@
-export const submitCampaing = () => {
-  return {
+export const submitCampaing = (payload) => ({
     type: "campaing/submit",
-  };
-};
+    payload
+});

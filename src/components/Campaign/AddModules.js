@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { addModules } from '../../state/actions/campaignActions';
 
 // DragDropContext = all of our colomns, Droppable colomn, Draggable card
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
@@ -66,7 +67,7 @@ const AddModules = () => {
   );
 
   const onClick = () => {
-    dispatch({ type: "campaign/addModules", payload: totals });
+    dispatch(addModules(totals));
     history.push("./schedule-campaign");
   };
 

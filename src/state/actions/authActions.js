@@ -1,11 +1,7 @@
-export const signIn = () => {
-  return {
-    type: "auth/signIn",
-  };
-};
+export const signIn = () => ({
+  type: "auth/signIn",
+});
 
-export const signOut = () => {
-  return {
-    type: "auth/signOut",
-  };
-};
+export const signOut = () => ({
+  type: "auth/signOut",
+});

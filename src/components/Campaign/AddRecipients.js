@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
+import { addRecipients } from '../../state/actions/campaignActions'
 import * as XLSX from "xlsx";
 import FormWrapper from "../../hoc/FormWrapper/FormWrapper";
 
@@ -14,7 +15,7 @@ const AddRecipients = () => {
   const { handleSubmit } = useForm();
 
   const onSubmit = () => {
-    dispatch({ type: "campaign/addRecipients", payload: { participants } });
+    dispatch(addRecipients({ participants }));
     history.push("./add-modules");
   };
 

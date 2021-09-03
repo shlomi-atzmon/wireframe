@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { addDetails , removeCampaing } from '../../state/actions/campaignActions'
 
 //Dummy data
 import { getDate } from "../../services/Date";
@@ -42,12 +43,12 @@ const CampaignDetails = () => {
   const onSubmit = (data) => {
     data.user = User;
     data.scheduled = getDate();
-    dispatch({ type: "campaign/details", payload: data });
+    dispatch(addDetails(data));
     history.push("./add-recipients");
   };
 
   const onDiscard = () => {
-    dispatch({ type: "campaign/remove" });
+    dispatch(removeCampaing());
     history.push("./dashboard");
   };
 
